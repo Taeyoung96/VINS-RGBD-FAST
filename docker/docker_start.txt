@@ -1,0 +1,18 @@
+처음에 local 들어가기 전
+
+xhost +local:docker
+
+
+nvidia-docker run --privileged -it \
+           -e NVIDIA_DRIVER_CAPABILITIES=all \
+           -e NVIDIA_VISIBLE_DEVICES=all \
+           --volume=/home/husky/Desktop/VINS-RGBD-FAST:/root/ros_ws/src \
+           --volume=/tmp/.X11-unix:/tmp/.X11-unix:rw \
+           --net=host \
+           --ipc=host \
+           --shm-size=1gb \
+           --name=vins-rgbd-fast \
+           --env="DISPLAY=$DISPLAY" \
+           vins-rgbd-fast:latest /bin/bash
+
+docker exec -it -w /root/ros_ws vins-rgbd-fast /bin/bash
